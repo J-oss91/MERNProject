@@ -1,0 +1,35 @@
+.container {
+    text-align: center;
+  }
+
+  .table-select {
+    margin-bottom: 20px;
+  }
+
+  .game-board {
+    display: none;
+    margin: 0 auto;
+  }
+
+  .game-board table {
+    border-collapse: collapse;
+  }
+
+  .game-board td {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ccc;
+    text-align: center;
+  }
+
+  .game-board td.ship {
+    background-color: #999;
+  }
+
+  .game-board td.hit {
+    background-color: #ff0000;
+  }
+
+  .game-board td.miss {
+    background-color: #0000ff;
+  }
