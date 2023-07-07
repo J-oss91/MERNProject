@@ -126,7 +126,6 @@
 //         winnerMessage.textContent = '';
 //         winnerMessage.classList.remove('winner-message--visible');
 //       }
-      
 //     }
 //   }
   
@@ -135,6 +134,7 @@
 //     boardCells.forEach((cell) => {
 //       cell.textContent = '';
 //       cell.addEventListener('click', makePlayerMove);
+      
 //     });
   
 //     playerTurn.textContent = 'Player 1 Turn';
@@ -146,7 +146,9 @@
 //   });
   
 //   startButton.addEventListener('click', restartGame);
-  
+// //   JD
+ 
+
 class TicTacToe {
     constructor() {
       this.board = [
@@ -259,13 +261,13 @@ class TicTacToe {
       if (game.checkGameOver()) {
         if (game.winner) {
           setTimeout(() => {
-            winnerMessage.textContent = `Congrats Player ${game.winner}! You have won!`;
+            winnerMessage.textContent = `Player ${game.winner} has won!`;
             playerTurn.textContent = '';
             winnerMessage.classList.add('winner-message--visible');
           }, 100);
         } else {
           setTimeout(() => {
-            winnerMessage.textContent = "It's a draw!";
+            winnerMessage.textContent = "Game ended in a draw!";
             playerTurn.textContent = '';
             winnerMessage.classList.add('winner-message--visible');
           }, 100);
@@ -294,5 +296,4 @@ class TicTacToe {
   });
   
   startButton.addEventListener('click', restartGame);
-  //JD
   
