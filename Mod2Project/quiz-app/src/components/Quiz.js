@@ -11,7 +11,6 @@ export class Quiz extends Component {
     disabled: true,
     feedback: null, // New state to store feedback message
   };
-
   // Function to handle user's answer selection and go to the next question
   handleOptionClick = (answer) => {
     const { currentIndex } = this.state;
@@ -66,45 +65,44 @@ export class Quiz extends Component {
     });
   };
 
- render() {
-  const { currentIndex, quizEnd, feedback } = this.state;
+  render() {
+    const { currentIndex, quizEnd, feedback } = this.state;
+    const currentQuestion = QuizData[currentIndex];
 
-  if (quizEnd) {
-    // Render quiz results or a "Quiz completed" message
-    return <div>Quiz completed! Your score is {this.state.score}.</div>;
+    if (quizEnd) {
+      // Render quiz results or a "Quiz completed" message
+      return <div>Quiz completed! Your score is {this.state.score}.</div>;
+    }
+
+    return (
+      <div>
+        <h2>Question {currentIndex + 1}</h2>
+        <h3>{currentQuestion.question}</h3>
+        {feedback && <p>{feedback}</p>} {/* Display feedback if available */}
+        <ul>
+          {currentQuestion.options.map((option, index) => (
+            <li key={index}>
+              <input
+                type="radio"
+                name="option"
+                id={`option-${index}`}
+                value={option}
+                checked={this.state.userAnswer === option}
+                onChange={this.handleRadioChange}
+              />
+              <label htmlFor={`option-${index}`}>{option}</label>
+            </li>
+          ))}
+        </ul>
+        <button
+          onClick={this.handleOptionClick.bind(this, this.state.userAnswer)}
+          disabled={this.state.disabled}
+        >
+          Next
+        </button>
+      </div>
+    );
   }
-
-  return (
-    <div>
-      <h2 style={{ color: feedback === 'Correct!' ? 'green' : 'red' }}>
-        {QuizData[currentIndex].question}
-      </h2>
-      {feedback && <p>{feedback}</p>} {/* Display feedback if available */}
-      <ul>
-        {QuizData[currentIndex].options.map((option, index) => (
-          <li key={index}>
-            <input
-              type="radio"
-              name="option"
-              id={`option-${index}`}
-              value={option}
-              checked={this.state.userAnswer === option}
-              onChange={this.handleRadioChange}
-            />
-            <label htmlFor={`option-${index}`}>{option}</label>
-          </li>
-        ))}
-      </ul>
-      <button
-        onClick={this.handleOptionClick.bind(this, this.state.userAnswer)}
-        disabled={this.state.disabled}
-      >
-        Next
-      </button>
-    </div>
-  );
-}
-
 }
 
 export default Quiz;
