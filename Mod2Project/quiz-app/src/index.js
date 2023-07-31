@@ -1,15 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Quiz from './components/Quiz';
+import App from './App';
 import './style.css';
 
-function App() {
-    return (
-        <div className="App">
-            <Quiz />
-        </div>
-    );
-};
 
-const rootElement = document.getElementById('root');
-ReactDOM.createRoot(rootElement).render(<App />);
+const root= ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>
+)

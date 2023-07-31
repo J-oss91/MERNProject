@@ -47,6 +47,18 @@
         options: ["10", "15", "20", "25"],
         answer: "10",
       },
+      {
+        id:0,
+        question: "This song is still as popular as when it was released. It was sung by the band Journey. Glee made their own version of this song. Just A Small Town Girl (You know the rest). What is the name of this song?",
+        options: ["Don't Stop Believin'","Still They Ride","Separate Ways","Stoned In Love"],
+        answer: "Don't Stop Believin",
+      },
+      {
+        id:0,
+        quiestion: "This song was sung by Aerosmith and was featured in Mrs. Doubtfire (1994).",
+        options: ["Dream On"," Sweet Emotion","Walk This Way"," Dude Looks Like A Lady"],
+        answer: " Dude Looks Like A Lady"
+      },
       
     ];
 
