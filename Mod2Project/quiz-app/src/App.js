@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './style.css';
 import Quiz from './components/Quiz';
 import HomePage from './pages/HomePage';
 import ResultPage from './pages/ResultPage';
+import QuizData from './components/QuizData';
 
 function App() {
   const [quizStarted, setQuizStarted] = useState(false);
@@ -22,24 +23,12 @@ function App() {
 
   return (
     <div className="App">
-     
       <Router>
-        <Switch>
-         
-          <Route path="/result">
-            <ResultPage score={score} totalQuestions={QuizData.length} />
-          </Route>
-
-         
-          <Route path="/quiz">
-            <Quiz questions={QuizData} finishHandler={finishHandler} />
-          </Route>
-
-         
-          <Route exact path="/">
-            <HomePage startQuizHandler={startQuizHandler} />
-          </Route>
-        </Switch>
+        <Routes>
+          <Route path="/" element={<HomePage startQuizHandler={startQuizHandler} />} />
+          <Route path="/quiz" element={<Quiz questions={QuizData} finishHandler={finishHandler} />} />
+          <Route path="/result" element={<ResultPage score={score} totalQuestions={QuizData.length} />} />
+        </Routes>
       </Router>
       {quizEnd && <p>Quiz has ended!</p>}
       {quizStarted && <p>Quiz is in progress...</p>}
@@ -48,4 +37,5 @@ function App() {
 }
 
 export default App;
+
 
