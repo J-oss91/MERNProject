@@ -13,15 +13,7 @@ export default function ResultTable() {
                 </tr>
 
             </thead>
-            <tbody>
-            <tr className='table-body'>
-                            <td>Jos</td>
-                            <td>05</td>
-                            <td>20</td>
-                            <td>passed</td>
-                        </tr>
-
-            </tbody>
+    
         </table>
     </div>
   )

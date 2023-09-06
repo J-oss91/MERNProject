@@ -1,60 +1,58 @@
 import { useEffect, useState } from "react"
-import data from "../database/data";
 import { useDispatch } from "react-redux";
+import { getServerData } from "../helper/helper";
 
-//redux actions
+/** redux actions */
 import * as Action from '../redux/question_reducer'
 
-
-//fetch question hook to get api  data
-export const useFetchQuestion = () => {
-    const dispatch = useDispatch();
-    const [getData, setGetData] = useState({ isLoading : false, apiData : [], serverError: null})
+/** fetch question hook to fetch api data and set value to store */
+export const useFetchQestion = () => {
+    const dispatch = useDispatch();   
+    const [getData, setGetData] = useState({ isLoading : false, apiData : [], serverError: null});
 
     useEffect(() => {
         setGetData(prev => ({...prev, isLoading : true}));
 
-        // asyanc => fetch backend data
+        /** async function fetch backend data */
         (async () => {
-            try{
-                let question = await data;
-
-                if(question.length >0){
-                    setGetData(prev => ({...prev, isLoading : false}));
-                    setGetData(prev => ({...prev, apiData: question}));
-
-                    //dispatch an action
-                    dispatch(Action.startExamAction(question))
-                } else{
-                    throw new Error("No Question Avalible");
-                }
+            try {
+                const [{ questions, answers }] = await getServerData(`${process.env.REACT_APP_SERVER_HOSTNAME}/api/questions`, (data) => data)
                 
-            }  catch( error) {
+                if(questions.length > 0){
+                    setGetData(prev => ({...prev, isLoading : false}));
+                    setGetData(prev => ({...prev, apiData : questions}));
+
+                    /** dispatch an action */
+                    dispatch(Action.startExamAction({ question : questions, answers }))
+
+                } else{
+                    throw new Error("No Question Avalibale");
+                }
+            } catch (error) {
                 setGetData(prev => ({...prev, isLoading : false}));
-                setGetData(prev => ({...prev, serverError: error}));
+                setGetData(prev => ({...prev, serverError : error}));
             }
         })();
-
     }, [dispatch]);
 
-    return [getData, setGetData]
-
+    return [getData, setGetData];
 }
 
-//MoveAction Dispact function
-export const moveNextQuestion = () => async (dispatch)=> {
-    try{
-        dispatch(Action.moveNextAction());
-   }catch (error){
+
+/** MoveAction Dispatch function */
+export const MoveNextQuestion = () => async (dispatch) => {
+    try {
+        dispatch(Action.moveNextAction()); /** increase trace by 1 */
+    } catch (error) {
         console.log(error)
     }
 }
 
-////PrevAction Dispact function
-export const movePrevQuestion = () => async (dispatch)=> {
-    try{
-        dispatch(Action.movePrevAction());
-   }catch (error){
+/** PrevAction Dispatch function */
+export const MovePrevQuestion = () => async (dispatch) => {
+    try {
+        dispatch(Action.movePrevAction()); /** decrease trace by 1 */
+    } catch (error) {
         console.log(error)
     }
 }

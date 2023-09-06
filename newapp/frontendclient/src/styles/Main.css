@@ -1,4 +1,4 @@
-.container ol li{
+/* .container ol li{
     font-size: 1.4em;
     color: #cecece;
 }
@@ -31,4 +31,30 @@
     border: none;
     border-radius: 3px;
     font-size: 1em;
+} */
+
+.container ol li {
+    font-size: 1.4em;
+    color: #cecece;
+}
+
+.start {
+    display: flex;
+    justify-content: center;
+    padding-top: 2em;
+}
+
+.start .btn {
+    padding: .2em 1.7em;
+    border: none;
+    border-radius: 50%; /* Use border-radius to create a circle */
+    font-size: 1.2em;
+    color: #202020;
+    text-decoration: none;
+    background-color: #faff5a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2em; /* Set a fixed width to make it circular */
+    height: 2em; /* Set a fixed height to make it circular */
 }
